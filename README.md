@@ -99,7 +99,50 @@ Check Composer installed or not just type:
 
 7. Install Magento 2
 
+- run cmd: composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.3 commercers_m2
 
+- Set file permissions
+$ cd /var/www/html/myo_m2_dev
+find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} +
+find var generated vendor pub/static pub/media app/etc -type d -exec chmod g+ws {} +
+chown -R magento2:www-data .
+chmod u+x bin/magento
+
+- Open conf.d/
+cd /etc/nginx/conf.d
+-copy: sudo cp 8season.conf myo-m2-dev.conf
+-edit: sudo nano myo-m2-dev.conf
+-delete: sudo rm -ri [name_file]
+finally: 
+sudo service apache2 stop
+sudo service nginx restart
+
+sudo service elasticsearch start
+sudo service elasticsearch status
+
+check: sudo nginx -t
+
+- Install DB Magento
+$ php -dmemory_limit=5G bin/magento setup:install \
+--base-url=http://commercers-m2-ubuntu.local \
+--db-host=localhost \
+--db-name=commercers_m2 \
+--db-user=magento2 \
+--db-password=@Nt1h4ck \
+--admin-firstname=Dong \
+--admin-lastname=Truong \
+--admin-email=truongdong@commercers.com \
+--admin-user=dongtruong \
+--admin-password=Truong123456789 \
+--language=en_US \
+--currency=USD \
+--timezone=America/Chicago \
+--use-rewrites=1 \
+--search-engine=elasticsearch7 \
+--elasticsearch-host=https://es-so6.rackspeed-cloud.de \
+--elasticsearch-port=9200 \
+--elasticsearch-username=elasticsearch \
+--elasticsearch-password=zkMxSLbEBCyr
 
 ~~~~~~~~~~~~~~~~~~~~~
 Note:
