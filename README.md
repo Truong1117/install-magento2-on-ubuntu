@@ -98,3 +98,12 @@ Check Composer installed or not just type:
   composer -v
 
 7. Install Magento 2
+
+
+
+~~~~~~~~~~~~~~~~~~~~~
+Note:
+sudo vi /lib/systemd/system/nginx.service
+sudo nano /lib/systemd/system/nginx.service
+sudo systemctl reload nginx
+systemctl daemon-reload
